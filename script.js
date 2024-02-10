@@ -56,3 +56,11 @@ function openStory(url, pic, name, time) {
     document.getElementById("time").innerText = time
     document.getElementById("name").innerText = name.split(" ").join("_").toLowerCase()
 }
+function like(){
+    document.querySelector(".fa-heart").style.transform = "translate(-50%,-50%) scale(1)"
+    document.querySelector(".fa-heart").style.opacity = "1"
+    setTimeout(() => {
+        document.querySelector(".fa-heart").style.transform = "translate(-50%,-50%) scale(0)"
+        document.querySelector(".fa-heart").style.opacity = "0"
+    }, 700);
+}
