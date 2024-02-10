@@ -72,12 +72,12 @@ footer{
 .story{
     width: 100%;
     height: 100%;
-    background-image: url("https://i.pinimg.com/originals/41/71/1d/41711d83d3cf4aadde21ef90123431b3.jpg");
     position: absolute;
     top: 0;
     right: 0;
     z-index: 100;
     background-size: cover;
+    background-position: center;
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -109,12 +109,12 @@ footer{
 }
 .story .about .info p{
     color: white;
-    font-size: 20px;
+    font-size: 16px;
     margin-left: 5px;
 }
 .story .about .info span{
     color: rgba(255, 255, 255, 0.40);
-    font-size: 17px;
+    font-size: 14px;
 }
 .story .reply{
     display: flex;
@@ -127,7 +127,7 @@ footer{
     align-items: center;
     gap: 10px;
     padding: 5px;
-    background-color: rgba(255, 255, 255, 0.09);
+    background-color: rgba(255, 255, 255, 0.123);
     border-radius: 30px;
     width: 80%;
 }
@@ -143,4 +143,7 @@ footer{
     display: flex;
     align-items: center;
     gap: 15px;
+}
+img{
+    cursor: pointer;
 }
