@@ -41,12 +41,12 @@ var storyArr = [
 storyArr.map((key) => {
     document.getElementById("stories").innerHTML += `
     <div style="display: flex; align-items: center; justify-content: center; flex-direction: column">
-        <div style="background: linear-gradient(to right, #FBAA47, #D91A46,#A60F93); padding: 2px; border-radius: 50%; display: flex; align-items: center; justify-content: center">
-            <img src=${key.profPic} width="65" height="65" style="border-radius: 50%; object-fit: cover ;border: 3px solid #fff" onclick="openStory('${key.storyPic}','${key.profPic}','${key.name}','${key.time}')"/>
-        </div>
-        <p style="font-size: 10px; margin-top: 5px; text-align: center">${key.name}</p>
+    <div style="background: linear-gradient(to right, #FBAA47, #D91A46,#A60F93); padding: 2px; border-radius: 50%; display: flex; align-items: center; justify-content: center">
+    <img src=${key.profPic} width="65" height="65" style="border-radius: 50%; object-fit: cover ;border: 3px solid #fff" onclick="openStory('${key.storyPic}','${key.profPic}','${key.name}','${key.time}')"/>
     </div>
-    `
+    <p style="font-size: 10px; margin-top: 5px; text-align: center">${key.name}</p>
+            </div>
+            `
 })
 function fetchPost() {
     fetch('https://dummyjson.com/posts')
@@ -56,21 +56,50 @@ function fetchPost() {
             for (let i = 0; i < RlPost.posts.length; i++) {
                 let reactionHTML = "";
                 for (let tag of RlPost.posts[i].tags) {
-                    reactionHTML += `<button>${tag}</button>`;
+                    let randomColor = getRandomBrightColor()
+                    reactionHTML += `<button style="padding: 5px 15px; border-radius: 30px; outline: none; border: none; background-color: ${randomColor}; cursor: pointer">${tag}</button>`;
                 }
+
                 document.getElementById("posts").innerHTML += `
-                    <div>
-                        <h1>${RlPost.posts[i].title}</h1>
-                        <p>${RlPost.posts[i].body}</p>
-                        <div class="reaction" id="r${i}">
-                            ${reactionHTML}
-                        </div>
+                    <div style="margin: 10px; border: 1px solid #ccc; border-radius: 5px">
+                    <h1 style="font-size: 20px; padding: 5px 10px; color: #333 ;border-bottom: 1px solid #ccc">${RlPost.posts[i].title}</h1>
+                    <p style="padding: 5px 10px; line-height: 22px; color: #222">${RlPost.posts[i].body}</p>
+                    <div style="padding: 5px 10px; display: flex; allign-items: center; gap: 10px" id="r${i}">
+                    ${reactionHTML}
                     </div>
-                `;
+                    <h1 style="font-size: 14px; font-weight: normal; color: #333391; padding: 5px 10px; border-top: 1px solid #ccc; cursor:pointer" onclick="seeAllComments(event)">See all The comments</h1>
+                    <div id=${RlPost.posts[i].id} class="cc" style="padding: 5px 10px 10px 10px; display: flex; align-items: start; gap: 7px; width: 100%;flex-direction: column"></div>
+                    </div>
+                    `;
+                fetch(`https://dummyjson.com/posts/${RlPost.posts[i].id}/comments`)
+                    .then(res => res.json())
+                    .then(data => {
+                        var id = RlPost.posts[i].id
+                        var toCont = document.getElementById(`${id}`)
+                        for (j = 0; j < data.comments.length; j++) {
+                            toCont.innerHTML += `
+                                <p style="border: 1px solid #ccc; border-radius: 5px; padding: 5px; width: 100%">${j + 1}- ${data.comments[j].body}</p>
+                            `
+                        }
+                    });
             }
+            document.querySelectorAll(".cc").forEach(element => {
+                element.style.display = "none";
+            });
         });
 }
 fetchPost()
+
+function seeAllComments(event) {
+    var commentsContainer = event.target.nextElementSibling;
+    if (commentsContainer.style.display === "none" || commentsContainer.style.display === "") {
+        event.target.innerHTML = "See Less comments";
+        commentsContainer.style.display = "flex";
+    } else {
+        event.target.innerHTML = "See all The comments";
+        commentsContainer.style.display = "none";
+    }
+}
 
 function openStory(url, pic, name, time) {
     document.getElementById("story").style.backgroundImage = `url('${url}')`
@@ -86,4 +115,10 @@ function like() {
         document.querySelector(".fa-heart").style.transform = "translate(-50%,-50%) scale(0)"
         document.querySelector(".fa-heart").style.opacity = "0"
     }, 700);
+}
+
+function getRandomBrightColor() {
+    const minBrightness = 200;
+    let color = `rgb(${minBrightness + Math.floor(Math.random() * (255 - minBrightness))},${minBrightness + Math.floor(Math.random() * (255 - minBrightness))},${minBrightness + Math.floor(Math.random() * (255 - minBrightness))})`;
+    return color;
 }
