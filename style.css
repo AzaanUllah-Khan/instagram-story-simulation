@@ -50,13 +50,21 @@ main{
 main #stories::-webkit-scrollbar{
     width: 0;
 }
+main #posts::-webkit-scrollbar {
+    background-color: white;
+    width: 5px;
+}
+
+main #posts::-webkit-scrollbar-thumb {
+    background-color: #e3e3e3;
+    border-radius: 10px;
+}
 main #stories{
-    height: 10%;
     width: 100%;
     display: flex;
     align-items: center;
     gap: 10px;
-    padding: 10px;
+    padding: 10px 10px 0 10px;
     overflow-x: auto;
 }
 footer{
