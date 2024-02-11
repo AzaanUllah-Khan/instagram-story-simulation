@@ -51,6 +51,7 @@ main #stories::-webkit-scrollbar{
     width: 0;
 }
 main #stories{
+    height: 10%;
     width: 100%;
     display: flex;
     align-items: center;

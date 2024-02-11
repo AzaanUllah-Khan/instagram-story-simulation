@@ -1,3 +1,4 @@
+var RlPost;
 var storyArr = [
     {
         name: "Azaan Khan",
@@ -47,7 +48,29 @@ storyArr.map((key) => {
     </div>
     `
 })
-
+function fetchPost() {
+    fetch('https://dummyjson.com/posts')
+        .then(res => res.json())
+        .then(data => {
+            RlPost = data;
+            for (let i = 0; i < RlPost.posts.length; i++) {
+                let reactionHTML = "";
+                for (let tag of RlPost.posts[i].tags) {
+                    reactionHTML += `<button>${tag}</button>`;
+                }
+                document.getElementById("posts").innerHTML += `
+                    <div>
+                        <h1>${RlPost.posts[i].title}</h1>
+                        <p>${RlPost.posts[i].body}</p>
+                        <div class="reaction" id="r${i}">
+                            ${reactionHTML}
+                        </div>
+                    </div>
+                `;
+            }
+        });
+}
+fetchPost()
 
 function openStory(url, pic, name, time) {
     document.getElementById("story").style.backgroundImage = `url('${url}')`
@@ -56,7 +79,7 @@ function openStory(url, pic, name, time) {
     document.getElementById("time").innerText = time
     document.getElementById("name").innerText = name.split(" ").join("_").toLowerCase()
 }
-function like(){
+function like() {
     document.querySelector(".fa-heart").style.transform = "translate(-50%,-50%) scale(1)"
     document.querySelector(".fa-heart").style.opacity = "1"
     setTimeout(() => {
