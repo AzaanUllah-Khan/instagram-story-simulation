@@ -1,13 +1,17 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Instagram Simulator</title>
     <link rel="stylesheet" href="style.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+        integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
     <link rel="icon" href="./assets/Icon.png">
 </head>
+
 <body>
     <div class="container">
         <i class="fa-solid fa-heart"></i>
@@ -18,7 +22,8 @@
                     <p id="name"></p>
                     <span id="time"></span>
                 </div>
-                <img src="./assets/Close Icon.png" alt="close" onclick="document.getElementById('story').style.transform = 'scale(0)'">
+                <img src="./assets/Close Icon.png" alt="close"
+                    onclick="document.getElementById('story').style.transform = 'scale(0)'">
             </div>
             <div class="reply">
                 <div class="input">
@@ -44,13 +49,16 @@
             <div id="posts" style="height: 75%; overflow-y: auto;"></div>
         </main>
         <footer>
-            <img src="./assets/Tab 1.png" width="70" height="50" style="object-fit: cover;">
-            <img src="./assets/Tab 2.png" width="70" height="50" style="object-fit: cover;">
+            <img src="./assets/Tab 1.png" width="70" height="50" style="object-fit: cover;" onclick="fetchPost()">
+            <img src="./assets/Tab 2.png" width="70" height="50" style="object-fit: cover;" onclick="fetchBySearch()">
             <img src="./assets/Tab 3.png" width="70" height="50" style="object-fit: cover;">
             <img src="./assets/Tab 4.png" width="70" height="50" style="object-fit: cover;">
             <img src="./assets/Tab 5.png" width="70" height="50" style="object-fit: cover;">
         </footer>
     </div>
     <script src="script.js"></script>
+    <script src='https://cdn.jsdelivr.net/npm/sweetalert2@11'></script>
+    <script src='sweetalert2.all.min.js'></script>
 </body>
+
 </html>
